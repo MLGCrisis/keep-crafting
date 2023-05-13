@@ -4,7 +4,7 @@ Config.menu = 'qb-menu' -- keep-menu (recommended) / qb-menu
 
 Config.model_loading = {
      timeout = 1500, --ms
-     dealy = 50,     --ms
+     dealy = 50, --ms
 }
 
 Config.MagicTouch = false
@@ -48,7 +48,7 @@ Config.categories = {
 }
 
 Config.permanent_items = {
-     ['weapon_wrench'] = true
+     'wrench'
 }
 
 local misc_recipe = {
@@ -64,7 +64,7 @@ local misc_recipe = {
                     rotation = vector3(45.0, 0.0, -45.0)
                },
                image = 'repairkit', -- use inventory's images
-               level = 40,
+               level = 0,
                job = {
                     allowed_list = {},
                     allowed_grades = {}
@@ -131,11 +131,10 @@ local misc_recipe = {
                show_level_in_mail = true,
                success_rate = 100,
                amount = 1, -- crafted amount
-               duration = 5,
+               duration = 60,
                materials = {
-                    -- ["steel"] = 20,
-                    -- ["rubber"] = 20,
-                    ["weapon_wrench"] = 1,
+                    ["steel"] = 20,
+                    ["rubber"] = 20,
                },
                exp_per_craft = 5
           }
@@ -184,7 +183,7 @@ local weapons_recipe = {
                     name = 'p_cs_cuffs_02_s',
                     rotation = vector3(250.0, 0.0, 0.0)
                },
-               level = 50,
+               level = 0,
                job = {
                     allowed_list = {},
                     allowed_grades = {}
@@ -196,6 +195,97 @@ local weapons_recipe = {
                duration = 30,
                materials = {
                     ["steel"] = 30,
+               },
+               exp_per_craft = 20
+          }
+     },
+     ['weapon_stickybomb'] = {
+          categories = {
+               sub = 'tools',
+          },
+          item_settings = {
+               label = 'Stickybomb',
+               image = 'weapon_stickybomb', -- use inventory's images
+               object = {
+                    name = 'p_cs_cuffs_02_s',
+                    rotation = vector3(250.0, 0.0, 0.0)
+               },
+               level = 50,
+               job = {
+                    allowed_list = {},
+                    allowed_grades = {}
+               }
+          },
+          crafting = {
+               success_rate = 100,
+               amount = 1, -- crafted amount
+               duration = 30,
+               materials = {
+                    ["aluminumoxide"] = 50,
+                    ["copper"] = 50,
+                    ["ironoxide"] = 50,
+                    ["steel"] = 30,
+                    ["screwdriverset"] = 1,
+                    ["electronickit"] = 1,
+                    ["thermite"] = 1,
+               },
+               exp_per_craft = 5
+          }
+     },
+     ['electronickit'] = {
+          categories = {
+               sub = 'tools',
+          },
+          item_settings = {
+               label = 'Electronickit',
+               image = 'electronickit.png', -- use inventory's images
+               object = {
+                    name = 'p_cs_cuffs_02_s',
+                    rotation = vector3(250.0, 0.0, 0.0)
+               },
+               level = 50,
+               job = {
+                    allowed_list = {},
+                    allowed_grades = {}
+               }
+          },
+          crafting = {
+               success_rate = 100,
+               amount = 1, -- crafted amount
+               duration = 30,
+               materials = {
+                    ["steel"] = 5,
+                    ["copper"] = 5,
+                    ["screwdriverset"] = 1,
+               },
+               exp_per_craft = 5
+          }
+     },
+     ['trojan_usb'] = {
+          categories = {
+               sub = 'tools',
+          },
+          item_settings = {
+               label = 'Handcuffs',
+               image = 'usb_device.png', -- use inventory's images
+               object = {
+                    name = 'p_cs_cuffs_02_s',
+                    rotation = vector3(250.0, 0.0, 0.0)
+               },
+               level = 50,
+               job = {
+                    allowed_list = {},
+                    allowed_grades = {}
+               }
+          },
+          crafting = {
+               success_rate = 100,
+               amount = 1, -- crafted amount
+               duration = 30,
+               materials = {
+                    ["steel"] = 3,
+                    ["plastic"] = 3,
+                    ["copper"] = 3,
                },
                exp_per_craft = 5
           }
@@ -352,7 +442,7 @@ Config.workbenches = {
      -- -- items
      {
           table_model = "gr_prop_gr_bench_04b",
-          coords = vector3(1346.55, 4391.04, 43.36),
+          coords = vector3(708.06, -959.7, 29.4),
           item_show_case_offset = vector3(0.0, 0.0, 1.3),
           rotation = vector3(0.0, 0.0, 350),
           -- just use either job or gang using both at same time won't work.
@@ -370,7 +460,7 @@ Config.workbenches = {
      },
      {
           table_model = 'gr_prop_gr_bench_04b',
-          coords = vector3(-59.5, 6388.77, 30.49),
+          coords = vector3(822.24, -490.46, 29.39),
           rotation = vector3(0.0, 0.0, 225.0),
           job = {
                allowed_list = {},
@@ -382,18 +472,34 @@ Config.workbenches = {
      },
      {
           table_model = 'gr_prop_gr_bench_02b',
-          coords = vector3(2939.04, 4623.81, 47.72),
+          coords = vector3(1416.84, 1112.12, 113.83),
           item_show_case_offset = vector3(0.0, 0.0, 1.2),
-          rotation = vector3(0.0, 0.0, 47.0),
+          rotation = vector3(0.0, 0.0, 270.0),
           gang = {
-               allowed_list = { 'ballas' },
-               allowed_grades = { ['ballas'] = { 1, 2, 3, 4 } }
+               allowed_list = { 'saints' },
+               allowed_grades = { ['saints'] = { 1, 2, 3, 4 } }
+          },
+          categories = { Config.categories.weapons },
+          recipes = { weapons_recipe },
+          radius = 3.0
+     },
+     {
+          table_model = 'gr_prop_gr_bench_02b',
+          coords = vector3(-2613.35, 1681.61, 140.84),
+          item_show_case_offset = vector3(0.0, 0.0, 1.2),
+          rotation = vector3(0.0, 0.0, 136.0),
+          gang = {
+               allowed_list = { 'professionals' },
+               allowed_grades = { ['professionals'] = { 1, 2, 3, 4 } }
           },
           categories = { Config.categories.weapons },
           recipes = { weapons_recipe },
           radius = 3.0
      },
 }
+
+
+
 
 --gr_prop_gr_jailer_keys_01a
 
